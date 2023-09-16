@@ -6,32 +6,76 @@ import React, { useState } from "react";
 import WeeklyForcust from "./WeeklyForcust";
 import WeatherDetails from "./WeatherDetails";
 
+const InitialState = {
+  current: {
+    condition: {
+      icon: "",
+      text: "",
+    },
+    pressure_mb: 0,
+    feelslike_c: 0,
+    vis_km: 0,
+    temp_c: 0,
+    temp_f: 0,
+    wind_kph: 0,
+    humidity: 0,
+    wind_dir: "",
+  },
+  location: {
+    name: "",
+    region: "",
+    country: "",
+  },
+  forecast: {
+    forecastday: [
+      {
+        date: "",
+        astro: {
+          sunrise: "",
+          sunset: "",
+        },
+        day: {
+          maxtemp_c: 0,
+          maxtemp_f: 0,
+          mintemp_c: 0,
+          mintemp_f: 0,
+          condition: {
+            text: "",
+            icon: "",
+          },
+        },
+      },
+    ],
+  },
+};
+
 const App = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState(InitialState);
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const key = process.env.NEXT_PUBLIC_WEB_API_KEY;
-
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=7&aqi=yes&alerts=yes`;
+  const url = "/api/weather";
 
   const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && location.length > 0) {
       e.preventDefault();
       try {
         setLoading(true);
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify({ location }),
+        });
         if (!response.ok) {
           throw new Error();
         }
-        const data = await response.json();
+        const { data } = await response.json();
         setData(data);
         setLocation("");
         setError("");
       } catch (error: any) {
         setError("City not Found");
-        setData({});
+        setData(InitialState);
       } finally {
         setLoading(false);
       }
@@ -40,7 +84,7 @@ const App = () => {
 
   let content;
 
-  if (Object.keys(data).length === 0 && error === "") {
+  if (data === InitialState && error === "") {
     content = (
       <div className="text-white text-center mt-5">
         <h2 className="text-3xl font-semibold mb-4">Welcome to Weather App</h2>
