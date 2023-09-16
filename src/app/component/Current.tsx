@@ -25,7 +25,7 @@ const Current = ({ data }: InputProps) => {
   const weatherText = data.current?.condition.text;
 
   return (
-    <div className="flex flex-col mb-8 md:mb-0 items-start gap-2 w-1/2">
+    <div className="flex flex-col mb-8 md:mb-0 md:items-start items-center gap-2 md:w-1/2 w-full ">
       <div className="flex items-center">
         <div className="w-full">
           <h1 className="text-3xl text-white">Today</h1>

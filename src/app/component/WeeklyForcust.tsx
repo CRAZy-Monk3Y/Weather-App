@@ -36,7 +36,7 @@ interface InputProps {
 
 const WeeklyForcust = ({ data }: InputProps) => {
   return (
-    <div className="pl-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-8 md:gap-4 w-full">
+    <div className="pl-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-6 md:gap-4 w-full">
       {data.forecast.forecastday.map((day, index) => (
         <div
           key={index}

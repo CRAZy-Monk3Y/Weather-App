@@ -58,7 +58,7 @@ const App = () => {
   } else {
     content = (
       <>
-        <div className="flex md:flex-row flex-col p-12 items-center justify-between">
+        <div className="flex md:flex-row flex-col md:p-12 p-4 items-center justify-between">
           <Current data={data} />
           <WeeklyForcust data={data} />
         </div>
