@@ -6,51 +6,8 @@ import React, { useState } from "react";
 import WeeklyForcust from "./WeeklyForcust";
 import WeatherDetails from "./WeatherDetails";
 
-const InitialState = {
-  current: {
-    condition: {
-      icon: "",
-      text: "",
-    },
-    pressure_mb: 0,
-    feelslike_c: 0,
-    vis_km: 0,
-    temp_c: 0,
-    temp_f: 0,
-    wind_kph: 0,
-    humidity: 0,
-    wind_dir: "",
-  },
-  location: {
-    name: "",
-    region: "",
-    country: "",
-  },
-  forecast: {
-    forecastday: [
-      {
-        date: "",
-        astro: {
-          sunrise: "",
-          sunset: "",
-        },
-        day: {
-          maxtemp_c: 0,
-          maxtemp_f: 0,
-          mintemp_c: 0,
-          mintemp_f: 0,
-          condition: {
-            text: "",
-            icon: "",
-          },
-        },
-      },
-    ],
-  },
-};
-
 const App = () => {
-  const [data, setData] = useState(InitialState);
+  const [data, setData] = useState<any>({});
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -75,7 +32,7 @@ const App = () => {
         setError("");
       } catch (error: any) {
         setError("City not Found");
-        setData(InitialState);
+        setData({});
       } finally {
         setLoading(false);
       }
@@ -84,7 +41,7 @@ const App = () => {
 
   let content;
 
-  if (data === InitialState && error === "") {
+  if (Object.keys(data).length === 0 && error === "") {
     content = (
       <div className="text-white text-center mt-5">
         <h2 className="text-3xl font-semibold mb-4">Welcome to Weather App</h2>
