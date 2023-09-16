@@ -1,4 +1,3 @@
-import React from "react";
 import { getCurrentDate } from "../utils/currentDate";
 import { MdLocationOn } from "react-icons/md";
 
