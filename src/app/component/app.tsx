@@ -103,7 +103,7 @@ const App = () => {
             setLocation={setLocation}
             location={location}
           />
-          <h1 className="mb-8 md:mb-0 order-1 text-white py-2 px-4 rounded-xl font-bold italic">
+          <h1 className="mb-8 md:mb-0 order-1 text-white text-2xl py-2 px-4 rounded-xl font-bold italic">
             Weather App.
           </h1>
         </div>
