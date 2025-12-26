@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const key = process.env.NEXT_WEB_API_KEY;
 
-export async function POST(request: NextRequest, response: NextResponse) {
+export async function POST(request: NextRequest) {
   try {
     const { location } = await request.json();
     const url = `http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=7&aqi=yes&alerts=yes`;
@@ -17,6 +17,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     return NextResponse.json({ message: "success", data }, { status: 200 });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 4000 });
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }
